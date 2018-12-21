@@ -12,7 +12,7 @@ allprojects {
 }
 ```
 #### Dependency
-[![](https://jitpack.io/v/org.bitbucket.droidhelios/ProgressButtonX.svg)](https://jitpack.io/#org.bitbucket.droidhelios/ProgressButtonX)
+[![](https://jitpack.io/v/org.bitbucket.droidhelios/progressbuttonx.svg)](https://jitpack.io/#org.bitbucket.droidhelios/progressbuttonx)
 ```gradle
 dependencies {
     implementation 'org.bitbucket.droidhelios:ProgressButtonX:x.y'
