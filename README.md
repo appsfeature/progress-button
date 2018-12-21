@@ -2,7 +2,6 @@
 Show button with progress bar
   
 ## Setup
-[![](https://jitpack.io/v/Droidhelios/ProgressButton.svg)](https://jitpack.io/#Droidhelios/ProgressButton)
 
 Add this to your project build.gradle
 ``` gradle
@@ -12,14 +11,14 @@ allprojects {
     }
 }
 ```
-Add this to your module build.gradle
-
+#### Dependency
+[![](https://jitpack.io/v/org.bitbucket.droidhelios/ProgressButtonX.svg)](https://jitpack.io/#org.bitbucket.droidhelios/ProgressButtonX)
 ```gradle
-   dependencies {
-        implementation 'com.github.Droidhelios:ProgressButton:1.0' 
-   }
-
+dependencies {
+    implementation 'org.bitbucket.droidhelios:ProgressButtonX:x.y'
+}
 ```
+ 
 ### Usage
 In your <b>activity_main.xml</b> class: 
 ```xml 
@@ -30,12 +29,10 @@ In your <b>activity</b> class:
 #### Initialization method
 ```java 
     btnAction = ProgressButton.newInstance(this, getActivityRootView())
-                  .setText("Send Request")
-                  .setBackground(R.drawable.bg_button_disable)
+                  .setText("Send Request") 
                   .setOnClickListener(new View.OnClickListener() {
                       @Override
-                      public void onClick(View v) {
-                          executeTask();
+                      public void onClick(View v) { 
                       }
                   });
 ```
