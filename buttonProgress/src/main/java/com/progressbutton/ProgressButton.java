@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import androidx.core.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -373,11 +372,11 @@ public class ProgressButton {
 
 
     private Drawable getDrawableRes(Context context, int resource) {
-        return ContextCompat.getDrawable(context, resource);
+        return context.getResources().getDrawable( resource);
     }
 
     private int getColorRes(Context context, int resource) {
-        return ContextCompat.getColor(context, resource);
+        return context.getResources().getColor(resource);
     }
 
 

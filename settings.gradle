@@ -1,1 +1,2 @@
+rootProject.name='progress-button'
 include ':buttonProgress'
