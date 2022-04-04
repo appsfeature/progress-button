@@ -116,7 +116,7 @@ public class ProgressButton {
     public ProgressButton setTransparentBackground(int textColor) {
         if (btnAction != null) {
             btnAction.setBackgroundResource(getColorRes(context, R.color.transparent));
-            pBar.setIndeterminateDrawable(getDrawableRes(context, R.drawable.progress_custom_accent));
+            pBar.setIndeterminateDrawable(getDrawableRes(context, R.drawable.pb_progress_custom_accent));
             ivStatus.setBackgroundResource(getColorRes(context, R.color.transparent));
             ivStatus.setColorFilter(getColorRes(context, R.color.colorAccent));
             btnAction.setTextColor(textColor);
@@ -151,14 +151,14 @@ public class ProgressButton {
 
     public ProgressButton setDisableButton() {
         if (btnAction != null) {
-            return setBackground(R.drawable.bg_button_disable);
+            return setBackground(R.drawable.pb_bg_button_disable);
         }
         return this;
     }
 
     public ProgressButton setEnableButton() {
         if (btnAction != null) {
-            return setBackground(R.drawable.bg_button);
+            return setBackground(R.drawable.pb_bg_button);
         }
         return this;
     }
