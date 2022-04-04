@@ -3,7 +3,7 @@ Show button with progress bar
 
 ### Screenshots
 <p align="left">
-    <img src="https://raw.githubusercontent.com/appsfeature/progress-button/master/screenshot/preview.png" alt="Preview 1" width="200" />
+    <img src="https://raw.githubusercontent.com/appsfeature/progress-button/master/screenshot/preview.gif" alt="Preview 1" width="200" />
 </p>
 
 ## Setup
