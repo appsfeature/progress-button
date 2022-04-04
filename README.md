@@ -15,7 +15,7 @@ allprojects {
 [![](https://jitpack.io/v/appsfeature/progress-button.svg)](https://jitpack.io/#appsfeature/progress-button)
 ```gradle
 dependencies {
-    implementation 'com.github.appsfeature:progress-button:1.0'
+    implementation 'com.github.appsfeature:progress-button:1.1'
 }
 ```
  
