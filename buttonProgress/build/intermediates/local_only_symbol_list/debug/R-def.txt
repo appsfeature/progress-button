@@ -7,11 +7,11 @@ color colorPrimaryDark
 color colorWhite
 color transparent
 dimen buttonTextSize
-drawable bg_button
-drawable bg_button_disable
-drawable ic_checked
-drawable progress_custom_accent
-drawable progress_custom_white
+drawable pb_bg_button
+drawable pb_bg_button_disable
+drawable pb_ic_checked
+drawable pb_progress_custom_accent
+drawable pb_progress_custom_white
 id btn_action
 id iv_status
 id progressBar

@@ -5,11 +5,11 @@ int color colorPrimaryDark 0x0
 int color colorWhite 0x0
 int color transparent 0x0
 int dimen buttonTextSize 0x0
-int drawable bg_button 0x0
-int drawable bg_button_disable 0x0
-int drawable ic_checked 0x0
-int drawable progress_custom_accent 0x0
-int drawable progress_custom_white 0x0
+int drawable pb_bg_button 0x0
+int drawable pb_bg_button_disable 0x0
+int drawable pb_ic_checked 0x0
+int drawable pb_progress_custom_accent 0x0
+int drawable pb_progress_custom_white 0x0
 int id btn_action 0x0
 int id iv_status 0x0
 int id progressBar 0x0
