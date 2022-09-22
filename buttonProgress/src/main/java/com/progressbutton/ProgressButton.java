@@ -30,6 +30,7 @@ public class ProgressButton {
     // Properties
     //================================================================================
     private static final long BUTTON_PROGRESS_TIME = 500;
+    private long expandCollapseTime = 400;
     private final ProgressBar pBar;
     private final Button btnAction;
     private final ImageView ivStatus;
@@ -214,6 +215,11 @@ public class ProgressButton {
         btnAction.performClick();
     }
 
+    public ProgressButton setExpandCollapseTime(long expandCollapseTime) {
+        this.expandCollapseTime = expandCollapseTime;
+        return this;
+    }
+
     //================================================================================
     // Utility
     //================================================================================
@@ -223,15 +229,14 @@ public class ProgressButton {
         if (ivStatus != null) {
 //            ivStatus.startAnimation(inAnim);
 //            ivStatus.setVisibility(View.VISIBLE);
-            startAlphaAnimation(ivStatus, View.VISIBLE);
+            ProgressAnim.alphaAnimation(ivStatus, View.VISIBLE);
         }
     }
 
     private void showProgressBar() {
         if (pBar != null) {
 //            pBar.startAnimation(inAnim);
-//            pBar.setVisibility(View.VISIBLE);
-            startAlphaAnimation(pBar, View.VISIBLE); 
+            startAlphaAnimation(pBar, 10, View.VISIBLE);
         }
     }
 
@@ -239,7 +244,7 @@ public class ProgressButton {
         if (pBar != null) {
 //            pBar.startAnimation(outAnim);
 //            pBar.setVisibility(View.GONE);
-            startAlphaAnimation(pBar, View.GONE);
+            startAlphaAnimation(pBar, 10, View.GONE);
         }
     }
 
@@ -272,13 +277,14 @@ public class ProgressButton {
             });
 
             AnimatorSet animatorSet = new AnimatorSet();
-            animatorSet.setDuration(3000);
+            animatorSet.setDuration(expandCollapseTime);
             animatorSet.playTogether(
                     heightAnimation, widthAnimation);
             widthAnimation.addListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animation) {
                     hideProgressBar();
+                    btnAction.setText("");
                     btnAction.setVisibility(View.VISIBLE);
                 }
 
@@ -286,6 +292,7 @@ public class ProgressButton {
                 public void onAnimationEnd(Animator animation) {
                     btnAction.setText(text);
                     btnAction.setVisibility(View.VISIBLE);
+                    btnAction.setEnabled(true);
 //                    ivStatus.setVisibility(View.GONE);
                     startAlphaAnimation(ivStatus, View.GONE);
                 }
@@ -303,13 +310,13 @@ public class ProgressButton {
 //            ivStatus.setVisibility(View.GONE);
             startAlphaAnimation(ivStatus, View.GONE);
 
-            widthAnimation.start();
+            animatorSet.start();
         }
     }
 
     private void hideButtonAction() {
-
         if (btnAction != null) {
+            btnAction.setEnabled(false);
             int fromWidth, toWidth;
             fromWidth = mOriginalWidth;
             toWidth = mOriginalHeight;
@@ -336,7 +343,7 @@ public class ProgressButton {
                 }
             });
             AnimatorSet animatorSet = new AnimatorSet();
-            animatorSet.setDuration(3000);
+            animatorSet.setDuration(expandCollapseTime);
             animatorSet.playTogether(
                     heightAnimation, widthAnimation);
             widthAnimation.addListener(new Animator.AnimatorListener() {
@@ -359,7 +366,7 @@ public class ProgressButton {
                 public void onAnimationRepeat(Animator animation) {
                 }
             });
-            widthAnimation.start();
+            animatorSet.start();
         }
     }
 
