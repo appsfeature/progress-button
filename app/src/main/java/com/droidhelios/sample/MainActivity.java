@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnAction = ProgressButton.newInstance(this)
-                .setText("Login")
+                .setText("Login for your Account")
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }else {
                     // use this method when getting wrong response and revert the initial stage of button
-                    btnAction.setText("Retry");
+                    btnAction.setText("Retry for your acc");
                     btnAction.revertProgress();
                 }
             }

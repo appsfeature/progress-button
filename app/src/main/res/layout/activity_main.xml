@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     android:gravity="center|top"
     android:orientation="vertical"
     tools:context=".MainActivity">
@@ -26,6 +27,6 @@
         android:minWidth="250dp"
         android:hint="Password"/>
 
-    <include layout="@layout/button_progress"/>
+    <include layout="@layout/button_progress_full"/>
 
 </LinearLayout>

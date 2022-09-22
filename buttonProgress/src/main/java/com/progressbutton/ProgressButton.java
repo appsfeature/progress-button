@@ -37,12 +37,18 @@ public class ProgressButton {
     private final Context context;
     private int mOriginalWidth, mOriginalHeight;
     private String text;
+    private AnimatorListener mProgressListener;
 
     //================================================================================
     // Constructors
     //================================================================================
     public interface Listener {
         void onAnimationCompleted();
+    }
+
+    public interface AnimatorListener {
+        default void onAnimationStart(Animator animation) {}
+        void onAnimationEnd(Animator animation);
     }
 
     public static ProgressButton newInstance(Activity activity) {
@@ -248,6 +254,8 @@ public class ProgressButton {
         }
     }
 
+    private AnimatorSet mAnimatorSet;
+
     private void showButtonAction() {
         if (btnAction != null) {
             int fromWidth, toWidth;
@@ -276,9 +284,9 @@ public class ProgressButton {
                 }
             });
 
-            AnimatorSet animatorSet = new AnimatorSet();
-            animatorSet.setDuration(expandCollapseTime);
-            animatorSet.playTogether(
+            mAnimatorSet = new AnimatorSet();
+            mAnimatorSet.setDuration(expandCollapseTime);
+            mAnimatorSet.playTogether(
                     heightAnimation, widthAnimation);
             widthAnimation.addListener(new Animator.AnimatorListener() {
                 @Override
@@ -286,6 +294,9 @@ public class ProgressButton {
                     hideProgressBar();
                     btnAction.setText("");
                     btnAction.setVisibility(View.VISIBLE);
+                    if(mProgressListener != null){
+                        mProgressListener.onAnimationStart(animation);
+                    }
                 }
 
                 @Override
@@ -295,6 +306,9 @@ public class ProgressButton {
                     btnAction.setEnabled(true);
 //                    ivStatus.setVisibility(View.GONE);
                     startAlphaAnimation(ivStatus, View.GONE);
+                    if(mProgressListener != null){
+                        mProgressListener.onAnimationEnd(animation);
+                    }
                 }
 
                 @Override
@@ -310,7 +324,7 @@ public class ProgressButton {
 //            ivStatus.setVisibility(View.GONE);
             startAlphaAnimation(ivStatus, View.GONE);
 
-            animatorSet.start();
+            mAnimatorSet.start();
         }
     }
 
@@ -342,20 +356,26 @@ public class ProgressButton {
                     btnAction.setLayoutParams(layoutParams);
                 }
             });
-            AnimatorSet animatorSet = new AnimatorSet();
-            animatorSet.setDuration(expandCollapseTime);
-            animatorSet.playTogether(
+            mAnimatorSet = new AnimatorSet();
+            mAnimatorSet.setDuration(expandCollapseTime);
+            mAnimatorSet.playTogether(
                     heightAnimation, widthAnimation);
             widthAnimation.addListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animation) {
                     btnAction.setText("");
                     showProgressBar();
+                    if(mProgressListener != null){
+                        mProgressListener.onAnimationStart(animation);
+                    }
                 }
 
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     btnAction.setVisibility(View.GONE);
+                    if(mProgressListener != null){
+                        mProgressListener.onAnimationEnd(animation);
+                    }
                 }
 
                 @Override
@@ -366,7 +386,7 @@ public class ProgressButton {
                 public void onAnimationRepeat(Animator animation) {
                 }
             });
-            animatorSet.start();
+            mAnimatorSet.start();
         }
     }
 
@@ -416,5 +436,15 @@ public class ProgressButton {
         alphaAnimation.setDuration(duration);
         alphaAnimation.setFillAfter(true);
         v.startAnimation(alphaAnimation);
+    }
+
+    public ProgressButton addProgressListener(AnimatorListener listener){
+        this.mProgressListener = listener;
+        if(mAnimatorSet != null && !mAnimatorSet.isRunning()){
+            if (mProgressListener != null) {
+                mProgressListener.onAnimationEnd(null);
+            }
+        }
+        return this;
     }
 }
