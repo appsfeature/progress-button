@@ -9,5 +9,5 @@
     <color name="progress_color_button_disable">#bdbdbd</color>
     <color name="progress_color_text">@android:color/white</color>
     <dimen name="buttonTextSize">18sp</dimen>
-    <string name="submit">Submit</string>
+    <string name="progress_submit">Submit</string>
 </resources>

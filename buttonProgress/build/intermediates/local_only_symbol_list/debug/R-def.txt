@@ -11,7 +11,6 @@ color progress_color_text
 dimen buttonTextSize
 drawable pb_bg_button
 drawable pb_bg_button_disable
-drawable pb_bg_progress
 drawable pb_ic_checked
 drawable pb_progress_custom_accent
 drawable pb_progress_custom_white
@@ -22,4 +21,5 @@ id progressBar
 layout button_progress
 layout button_progress_full
 layout button_progress_full_style2
-string submit
+layout button_progress_style2
+string progress_submit

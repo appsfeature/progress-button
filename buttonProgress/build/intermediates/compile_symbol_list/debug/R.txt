@@ -9,7 +9,6 @@ int color progress_color_text 0x0
 int dimen buttonTextSize 0x0
 int drawable pb_bg_button 0x0
 int drawable pb_bg_button_disable 0x0
-int drawable pb_bg_progress 0x0
 int drawable pb_ic_checked 0x0
 int drawable pb_progress_custom_accent 0x0
 int drawable pb_progress_custom_white 0x0
@@ -20,4 +19,5 @@ int id progressBar 0x0
 int layout button_progress 0x0
 int layout button_progress_full 0x0
 int layout button_progress_full_style2 0x0
-int string submit 0x0
+int layout button_progress_style2 0x0
+int string progress_submit 0x0

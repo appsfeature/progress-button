@@ -32,7 +32,7 @@
 
     <Button
         android:id="@+id/btn_action"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:background="@drawable/pb_bg_button"
         android:layout_centerVertical="true"
