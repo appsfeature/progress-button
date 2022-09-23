@@ -27,6 +27,6 @@
         android:minWidth="250dp"
         android:hint="Password"/>
 
-    <include layout="@layout/button_progress_full"/>
+    <include layout="@layout/button_progress_full_style2"/>
 
 </LinearLayout>

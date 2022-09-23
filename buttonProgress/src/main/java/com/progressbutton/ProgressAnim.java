@@ -12,51 +12,35 @@ public class ProgressAnim {
         void onAnimationEnd(Animator animation);
     }
 
-    public static void alphaAnimation(View view, int visibility) {
-        alphaAnimation(view, 400, visibility, null);
+
+    public void startAlphaAnimation(View v, int visibility) {
+        startAlphaAnimation(v, 10, visibility);
     }
 
-    public static void alphaAnimation(View view, int duration, int visibility) {
-        alphaAnimation(view, duration, visibility, null);
-    }
-
-    public static void alphaAnimation(View view, int duration, int visibility, AnimatorListener animatorListener) {
-        if(view == null){
-            return;
-        }
-        AlphaAnimation alphaAnim;
-        if (visibility == View.VISIBLE) {
-            alphaAnim = new AlphaAnimation(0.0f, 1.0f);
-        } else {
-            alphaAnim = new AlphaAnimation(1.0f, 0.0f);
-        }
-        alphaAnim.setDuration(duration);
-        alphaAnim.setFillAfter(true);
-//        alphaAnim.setStartOffset(5000);
-        alphaAnim.setAnimationListener(new Animation.AnimationListener() {
-
+    public void startAlphaAnimation(final View v, long duration, final int visibility) {
+        AlphaAnimation alphaAnimation = (visibility == View.VISIBLE)
+                ? new AlphaAnimation(0f, 1f)
+                : new AlphaAnimation(1f, 0f);
+        alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
-            public void onAnimationEnd(Animation arg0) {
-                view.setVisibility(visibility);
-                if (animatorListener != null) {
-                    animatorListener.onAnimationEnd(null);
+            public void onAnimationStart(Animation animation) {
+                if (visibility == View.VISIBLE) {
+                    v.setVisibility(visibility);
                 }
             }
 
             @Override
-            public void onAnimationRepeat(Animation arg0) {
-
+            public void onAnimationEnd(Animation animation) {
+                v.setVisibility(visibility);
             }
 
             @Override
-            public void onAnimationStart(Animation arg0) {
-                if (animatorListener != null) {
-                    animatorListener.onAnimationStart(null);
-                }
-            }
+            public void onAnimationRepeat(Animation animation) {
 
+            }
         });
-        view.setVisibility(View.VISIBLE);
-        view.startAnimation(alphaAnim);
+        alphaAnimation.setDuration(duration);
+        alphaAnimation.setFillAfter(true);
+        v.startAnimation(alphaAnimation);
     }
 }

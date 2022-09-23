@@ -30,7 +30,7 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:src="@drawable/pb_ic_checked"
-        android:contentDescription="@string/submit" />
+        android:contentDescription="@string/progress_submit" />
 
     <Button
         android:id="@+id/btn_action"
@@ -43,8 +43,8 @@
         android:paddingRight="50dp"
         android:textAllCaps="false"
         android:textSize="@dimen/buttonTextSize"
-        android:textColor="@color/colorWhite"
-        android:text="@string/submit"  />
+        android:textColor="@color/progress_color_text"
+        android:text="@string/progress_submit"  />
 
 
 

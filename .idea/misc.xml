@@ -4,8 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Workspace/DroidHelios/progress-button/app/src/main/res/layout/activity_main.xml" value="0.275" />
+        <entry key="..\:/Workspace/DroidHelios/progress-button/buttonProgress/src/main/res/drawable/pb_bg_button.xml" value="0.158" />
+        <entry key="..\:/Workspace/DroidHelios/progress-button/buttonProgress/src/main/res/drawable/pb_bg_button_disable.xml" value="0.158" />
+        <entry key="..\:/Workspace/DroidHelios/progress-button/buttonProgress/src/main/res/drawable/pb_bg_progress.xml" value="0.158" />
+        <entry key="..\:/Workspace/DroidHelios/progress-button/buttonProgress/src/main/res/drawable/pb_progress_custom_accent.xml" value="0.158" />
+        <entry key="..\:/Workspace/DroidHelios/progress-button/buttonProgress/src/main/res/drawable/pb_progress_custom_white.xml" value="0.158" />
+        <entry key="..\:/Workspace/DroidHelios/progress-button/buttonProgress/src/main/res/drawable/pb_progress_custom_white_style2.xml" value="0.158" />
         <entry key="..\:/Workspace/DroidHelios/progress-button/buttonProgress/src/main/res/layout/button_progress.xml" value="0.275" />
         <entry key="..\:/Workspace/DroidHelios/progress-button/buttonProgress/src/main/res/layout/button_progress_full.xml" value="0.275" />
+        <entry key="..\:/Workspace/DroidHelios/progress-button/buttonProgress/src/main/res/layout/button_progress_full_style2.xml" value="0.4671280276816609" />
       </map>
     </option>
   </component>

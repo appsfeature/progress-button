@@ -1,18 +1,24 @@
 com.progressbutton
-color buttonDisableColor
 color colorAccent
 color colorPrimary
 color colorPrimaryDark
-color colorWhite
-color transparent
+color progress_color_bar_white
+color progress_color_button
+color progress_color_button_dark
+color progress_color_button_disable
+color progress_color_text
 dimen buttonTextSize
 drawable pb_bg_button
 drawable pb_bg_button_disable
+drawable pb_bg_progress
 drawable pb_ic_checked
 drawable pb_progress_custom_accent
 drawable pb_progress_custom_white
+drawable pb_progress_custom_white_style2
 id btn_action
 id iv_status
 id progressBar
 layout button_progress
+layout button_progress_full
+layout button_progress_full_style2
 string submit

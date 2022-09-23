@@ -30,6 +30,7 @@ public class ProgressButton {
     // Properties
     //================================================================================
     private static final long BUTTON_PROGRESS_TIME = 500;
+    private final ProgressAnim mAnim;
     private long expandCollapseTime = 400;
     private final ProgressBar pBar;
     private final Button btnAction;
@@ -61,6 +62,7 @@ public class ProgressButton {
 
     private ProgressButton(Context context, View view) {
         this.context = context;
+        this.mAnim = new ProgressAnim();
         ivStatus = view.findViewById(R.id.iv_status);
         pBar = view.findViewById(R.id.progressBar);
         btnAction = view.findViewById(R.id.btn_action);
@@ -122,9 +124,9 @@ public class ProgressButton {
 
     public ProgressButton setTransparentBackground(int textColor) {
         if (btnAction != null) {
-            btnAction.setBackgroundResource(getColorRes(context, R.color.transparent));
+            btnAction.setBackgroundResource(getColorRes(context, android.R.color.transparent));
             pBar.setIndeterminateDrawable(getDrawableRes(context, R.drawable.pb_progress_custom_accent));
-            ivStatus.setBackgroundResource(getColorRes(context, R.color.transparent));
+            ivStatus.setBackgroundResource(getColorRes(context, android.R.color.transparent));
             ivStatus.setColorFilter(getColorRes(context, R.color.colorAccent));
             btnAction.setTextColor(textColor);
         }
@@ -235,14 +237,14 @@ public class ProgressButton {
         if (ivStatus != null) {
 //            ivStatus.startAnimation(inAnim);
 //            ivStatus.setVisibility(View.VISIBLE);
-            ProgressAnim.alphaAnimation(ivStatus, View.VISIBLE);
+            mAnim.startAlphaAnimation(ivStatus, View.VISIBLE);
         }
     }
 
     private void showProgressBar() {
         if (pBar != null) {
 //            pBar.startAnimation(inAnim);
-            startAlphaAnimation(pBar, 10, View.VISIBLE);
+            mAnim.startAlphaAnimation(pBar, 10, View.VISIBLE);
         }
     }
 
@@ -250,7 +252,7 @@ public class ProgressButton {
         if (pBar != null) {
 //            pBar.startAnimation(outAnim);
 //            pBar.setVisibility(View.GONE);
-            startAlphaAnimation(pBar, 10, View.GONE);
+            mAnim.startAlphaAnimation(pBar, 10, View.GONE);
         }
     }
 
@@ -305,7 +307,7 @@ public class ProgressButton {
                     btnAction.setVisibility(View.VISIBLE);
                     btnAction.setEnabled(true);
 //                    ivStatus.setVisibility(View.GONE);
-                    startAlphaAnimation(ivStatus, View.GONE);
+                    mAnim.startAlphaAnimation(ivStatus, View.GONE);
                     if(mProgressListener != null){
                         mProgressListener.onAnimationEnd(animation);
                     }
@@ -322,7 +324,7 @@ public class ProgressButton {
             hideProgressBar();
             btnAction.setVisibility(View.VISIBLE);
 //            ivStatus.setVisibility(View.GONE);
-            startAlphaAnimation(ivStatus, View.GONE);
+            mAnim.startAlphaAnimation(ivStatus, View.GONE);
 
             mAnimatorSet.start();
         }
@@ -406,39 +408,7 @@ public class ProgressButton {
         return context.getResources().getColor(resource);
     }
 
-
-    public static void startAlphaAnimation(View v, int visibility) {
-        startAlphaAnimation(v, 10, visibility);
-    }
-
-    public static void startAlphaAnimation(final View v, long duration, final int visibility) {
-        AlphaAnimation alphaAnimation = (visibility == View.VISIBLE)
-                ? new AlphaAnimation(0f, 1f)
-                : new AlphaAnimation(1f, 0f);
-        alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-                if (visibility == View.VISIBLE) {
-                    v.setVisibility(visibility);
-                }
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                v.setVisibility(visibility);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-        alphaAnimation.setDuration(duration);
-        alphaAnimation.setFillAfter(true);
-        v.startAnimation(alphaAnimation);
-    }
-
-    public ProgressButton addProgressListener(AnimatorListener listener){
+    public ProgressButton addProgressListener(ProgressButton.AnimatorListener listener){
         this.mProgressListener = listener;
         if(mAnimatorSet != null && !mAnimatorSet.isRunning()){
             if (mProgressListener != null) {
