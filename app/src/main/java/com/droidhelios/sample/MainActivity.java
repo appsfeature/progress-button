@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
                 .setText("Login for your Account")
                 .setOnClickListener(new ProgressButton.ClickListener() {
                     @Override
-                    public void onClicked() {
+                    public void onClicked(View view) {
                         startTask();
                     }
                 });

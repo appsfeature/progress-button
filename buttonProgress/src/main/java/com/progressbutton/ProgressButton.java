@@ -6,13 +6,10 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,6 +36,7 @@ public class ProgressButton implements View.OnClickListener{
     private String text;
     private AnimatorListener mProgressListener;
     private ClickListener mClickListener;
+    private boolean isStopClickProgress = false;
 
 
     //================================================================================
@@ -49,7 +47,7 @@ public class ProgressButton implements View.OnClickListener{
     }
 
     public interface ClickListener {
-        void onClicked();
+        void onClicked(View view);
     }
 
     public interface AnimatorListener {
@@ -91,14 +89,20 @@ public class ProgressButton implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        startProgress(new Listener() {
-            @Override
-            public void onAnimationCompleted() {
-                if (mClickListener != null) {
-                    mClickListener.onClicked();
-                }
+        if(isStopClickProgress){
+            if (mClickListener != null) {
+                mClickListener.onClicked(view);
             }
-        });
+        }else {
+            startProgress(new Listener() {
+                @Override
+                public void onAnimationCompleted() {
+                    if (mClickListener != null) {
+                        mClickListener.onClicked(view);
+                    }
+                }
+            });
+        }
     }
 
 
@@ -423,6 +427,11 @@ public class ProgressButton implements View.OnClickListener{
         if (btnAction != null) {
             btnAction.setVisibility(visibility);
         }
+        return this;
+    }
+
+    public ProgressButton setStopClickProgress(boolean isStopClickProgress) {
+        this.isStopClickProgress = isStopClickProgress;
         return this;
     }
 
