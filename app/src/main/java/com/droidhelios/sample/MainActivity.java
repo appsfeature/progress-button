@@ -19,9 +19,9 @@ public class MainActivity extends AppCompatActivity {
 
         btnAction = ProgressButton.newInstance(this)
                 .setText("Login for your Account")
-                .setOnClickListener(new View.OnClickListener() {
+                .setOnClickListener(new ProgressButton.ClickListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onClicked() {
                         startTask();
                     }
                 });
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void startTask() {
         //use this method to initiate progress bar while starting task in background
-        btnAction.startProgress();
+//        btnAction.startProgress();
 
         TaskRunner.getInstance().executeAsync(new Callable<Boolean>() {
             @Override
@@ -48,7 +48,12 @@ public class MainActivity extends AppCompatActivity {
                     btnAction.revertSuccessProgress(new ProgressButton.Listener() {
                         @Override
                         public void onAnimationCompleted() {
-                            btnAction.revertProgress();
+                            btnAction.getButton().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    btnAction.revertProgress();
+                                }
+                            }, 400);
                         }
                     });
                 }else {

@@ -24,12 +24,11 @@ import android.widget.TextView;
 /**
  * Created by Admin on 8/28/2017.
  */
-public class ProgressButton {
+public class ProgressButton implements View.OnClickListener{
 
     //================================================================================
     // Properties
     //================================================================================
-    private static final long BUTTON_PROGRESS_TIME = 500;
     private final ProgressAnim mAnim;
     private long expandCollapseTime = 400;
     private final ProgressBar pBar;
@@ -39,12 +38,18 @@ public class ProgressButton {
     private int mOriginalWidth, mOriginalHeight;
     private String text;
     private AnimatorListener mProgressListener;
+    private ClickListener mClickListener;
+
 
     //================================================================================
     // Constructors
     //================================================================================
     public interface Listener {
         void onAnimationCompleted();
+    }
+
+    public interface ClickListener {
+        void onClicked();
     }
 
     public interface AnimatorListener {
@@ -73,16 +78,27 @@ public class ProgressButton {
                 mOriginalHeight = btnAction.getHeight();
             }
         });
+        btnAction.setOnClickListener(this);
     }
 
     //================================================================================
     // Accessors
     //================================================================================
-    public ProgressButton setOnClickListener(View.OnClickListener click) {
-        if (btnAction != null) {
-            btnAction.setOnClickListener(click);
-        }
+    public ProgressButton setOnClickListener(ClickListener clickListener) {
+        this.mClickListener = clickListener;
         return this;
+    }
+
+    @Override
+    public void onClick(View view) {
+        startProgress(new Listener() {
+            @Override
+            public void onAnimationCompleted() {
+                if (mClickListener != null) {
+                    mClickListener.onClicked();
+                }
+            }
+        });
     }
 
 
@@ -133,6 +149,10 @@ public class ProgressButton {
         return this;
     }
 
+    public Button getButton() {
+        return btnAction;
+    }
+
     public ProgressButton setText(String text) {
         this.text = text;
         if (btnAction != null) {
@@ -176,44 +196,45 @@ public class ProgressButton {
     //================================================================================
     // Action
     //================================================================================
-    public void startProgress() {
-        hideButtonAction();
+    protected void startProgress() {
+        startProgress(null);
     }
 
-    public void revertSuccessProgress(final Listener listener) {
-        Handler handler = new Handler();
-        Runnable runnableRevert = new Runnable() {
-            @Override
-            public void run() {
-                listener.onAnimationCompleted();
-            }
-        };
-        revertSuccessProgress();
-        handler.postDelayed(runnableRevert, BUTTON_PROGRESS_TIME);
+    protected void startProgress(Listener listener) {
+        hideButtonAction(listener);
     }
 
     public void revertProgress() {
         revertProgress(null);
     }
-    public void revertProgress(String buttonText) {
+
+    public void revertProgress(Listener listener) {
+        revertProgress(null, listener);
+    }
+
+    public void revertProgress(String buttonText, Listener listener) {
         if(!TextUtils.isEmpty(buttonText)){
             setText(buttonText);
         }
-        showButtonAction();
-    }
-    public void revertSuccessProgress() {
-        revertSuccessProgress(false);
+        showButtonAction(listener);
     }
 
-    public void revertSuccessProgress(Boolean btnVisibility) {
+    public void revertSuccessProgress() {
+        revertSuccessProgress(false, null);
+    }
+
+    public void revertSuccessProgress(final Listener listener) {
+        revertSuccessProgress(false, listener);
+    }
+
+    public void revertSuccessProgress(Boolean btnVisibility, Listener listener) {
         hideProgressBar();
         if (btnVisibility) {
-            showButtonAction();
+            showButtonAction(listener);
         } else {
-            showSuccessView();
+            showSuccessView(listener);
         }
     }
-
 
     public void performClick() {
         btnAction.performClick();
@@ -233,11 +254,11 @@ public class ProgressButton {
     //================================================================================
 
 
-    private void showSuccessView() {
+    private void showSuccessView(Listener listener) {
         if (ivStatus != null) {
 //            ivStatus.startAnimation(inAnim);
 //            ivStatus.setVisibility(View.VISIBLE);
-            mAnim.startAlphaAnimation(ivStatus, View.VISIBLE);
+            mAnim.startAlphaAnimation(ivStatus, View.VISIBLE, listener);
         }
     }
 
@@ -258,7 +279,7 @@ public class ProgressButton {
 
     private AnimatorSet mAnimatorSet;
 
-    private void showButtonAction() {
+    private void showButtonAction(Listener listener) {
         if (btnAction != null) {
             int fromWidth, toWidth;
             fromWidth = mOriginalHeight;
@@ -311,6 +332,9 @@ public class ProgressButton {
                     if(mProgressListener != null){
                         mProgressListener.onAnimationEnd(animation);
                     }
+                    if(listener != null){
+                        listener.onAnimationCompleted();
+                    }
                 }
 
                 @Override
@@ -330,7 +354,7 @@ public class ProgressButton {
         }
     }
 
-    private void hideButtonAction() {
+    private void hideButtonAction(Listener listener) {
         if (btnAction != null) {
             btnAction.setEnabled(false);
             int fromWidth, toWidth;
@@ -377,6 +401,9 @@ public class ProgressButton {
                     btnAction.setVisibility(View.GONE);
                     if(mProgressListener != null){
                         mProgressListener.onAnimationEnd(animation);
+                    }
+                    if(listener != null){
+                        listener.onAnimationCompleted();
                     }
                 }
 

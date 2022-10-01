@@ -7,17 +7,18 @@ import android.view.animation.Animation;
 
 public class ProgressAnim {
 
-    public interface AnimatorListener {
-        default void onAnimationStart(Animator animation) {}
-        void onAnimationEnd(Animator animation);
-    }
-
 
     public void startAlphaAnimation(View v, int visibility) {
-        startAlphaAnimation(v, 10, visibility);
+        startAlphaAnimation(v, visibility, null);
+    }
+    public void startAlphaAnimation(View v, int visibility, ProgressButton.Listener listener) {
+        startAlphaAnimation(v, 10, visibility, listener);
     }
 
     public void startAlphaAnimation(final View v, long duration, final int visibility) {
+        startAlphaAnimation(v, duration, visibility, null);
+    }
+    public void startAlphaAnimation(final View v, long duration, final int visibility, ProgressButton.Listener listener) {
         AlphaAnimation alphaAnimation = (visibility == View.VISIBLE)
                 ? new AlphaAnimation(0f, 1f)
                 : new AlphaAnimation(1f, 0f);
@@ -32,6 +33,9 @@ public class ProgressAnim {
             @Override
             public void onAnimationEnd(Animation animation) {
                 v.setVisibility(visibility);
+                if (listener != null) {
+                    listener.onAnimationCompleted();
+                }
             }
 
             @Override
