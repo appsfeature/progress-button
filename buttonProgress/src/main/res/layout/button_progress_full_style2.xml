@@ -8,7 +8,7 @@
 
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/btp_progress"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_centerVertical="true"
@@ -18,7 +18,7 @@
         android:indeterminateDrawable="@drawable/pb_progress_custom_white_style2" />
 
     <ImageView
-        android:id="@+id/iv_status"
+        android:id="@+id/btp_iv_status"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:scaleType="fitCenter"
@@ -31,7 +31,7 @@
         android:contentDescription="@string/progress_submit" />
 
     <Button
-        android:id="@+id/btn_action"
+        android:id="@+id/btp_btn_action"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@drawable/pb_bg_button"

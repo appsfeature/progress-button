@@ -66,9 +66,9 @@ public class ProgressButton implements View.OnClickListener{
     private ProgressButton(Context context, View view) {
         this.context = context;
         this.mAnim = new ProgressAnim();
-        ivStatus = view.findViewById(R.id.iv_status);
-        pBar = view.findViewById(R.id.progressBar);
-        btnAction = view.findViewById(R.id.btn_action);
+        ivStatus = view.findViewById(R.id.btp_iv_status);
+        pBar = view.findViewById(R.id.btp_progress);
+        btnAction = view.findViewById(R.id.btp_btn_action);
         btnAction.post(new Runnable() {
             @Override
             public void run() {
