@@ -200,11 +200,11 @@ public class ProgressButton implements View.OnClickListener{
     //================================================================================
     // Action
     //================================================================================
-    protected void startProgress() {
+    public void startProgress() {
         startProgress(null);
     }
 
-    protected void startProgress(Listener listener) {
+    public void startProgress(Listener listener) {
         hideButtonAction(listener);
     }
 
