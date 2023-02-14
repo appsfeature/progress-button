@@ -1,9 +1,11 @@
-package com.progressbutton;
+package com.progressbutton.base;
 
 import android.animation.Animator;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+
+import com.progressbutton.ProgressButton;
 
 public class ProgressAnim {
 
@@ -11,6 +13,7 @@ public class ProgressAnim {
     public void startAlphaAnimation(View v, int visibility) {
         startAlphaAnimation(v, visibility, null);
     }
+
     public void startAlphaAnimation(View v, int visibility, ProgressButton.Listener listener) {
         startAlphaAnimation(v, 10, visibility, listener);
     }
