@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="UnusedResources"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center" >
+
+
+    <ProgressBar
+        android:id="@+id/btp_progress"
+        android:layout_width="@dimen/pb_progress_height"
+        android:layout_height="@dimen/pb_progress_height"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        android:visibility="gone"
+        android:indeterminateDrawable="@drawable/pb_progress_custom_white_style2" />
+
+    <ImageView
+        android:id="@+id/btp_iv_status"
+        android:layout_width="@dimen/pb_progress_height"
+        android:layout_height="@dimen/pb_progress_height"
+        android:scaleType="fitCenter"
+        android:background="@drawable/pb_bg_button"
+        android:padding="12dp"
+        android:visibility="gone"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/pb_ic_checked"
+        android:contentDescription="@string/progress_submit" />
+
+    <Button
+        android:id="@+id/btp_btn_action"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pb_progress_height"
+        android:background="@drawable/pb_bg_button"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="@dimen/pb_button_padding"
+        android:paddingRight="@dimen/pb_button_padding"
+        android:textAllCaps="false"
+        android:textSize="@dimen/buttonTextSize"
+        android:textColor="@color/progress_color_text"
+        android:text="@string/progress_submit"  />
+
+
+
+</RelativeLayout>

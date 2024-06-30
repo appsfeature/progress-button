@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="buttonTextSize">18sp</dimen>
+    <dimen name="pb_progress_height">60dp</dimen>
+    <dimen name="pb_button_padding">50dp</dimen>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="progress_color_button_disable">#bdbdbd</color>
+
+    <color name="progress_color_text">@android:color/white</color>
+    <color name="progress_color_button">@color/colorPrimary</color>
+    <color name="progress_color_button_dark">@color/colorPrimaryDark</color>
+    <color name="progress_color_bar_white">#ffffff</color>
+</resources>
