@@ -40,7 +40,7 @@ public class ProgressButtonClass implements View.OnClickListener, ProgressButton
     private String text;
     private ProgressButton.AnimatorListener mProgressListener;
     private ProgressButton.ClickListener mClickListener;
-    private boolean isStopClickProgress = false;
+    private long initialProgressTakeTime = 2000;
 
 
     public static ProgressButtonClass newInstance(Activity activity) {
@@ -76,17 +76,15 @@ public class ProgressButtonClass implements View.OnClickListener, ProgressButton
 
     @Override
     public void onClick(View view) {
-        if(isStopClickProgress){
-            if (mClickListener != null) {
-                mClickListener.onClicked(view);
-            }
-        }else {
+        if(mClickListener.onValidate()){
             startProgress(new ProgressButton.Listener() {
                 @Override
                 public void onAnimationCompleted() {
-                    if (mClickListener != null) {
-                        mClickListener.onClicked(view);
-                    }
+                    handler.postDelayed(() -> {
+                        if (mClickListener != null) {
+                            mClickListener.onClicked(view);
+                        }
+                    }, initialProgressTakeTime);
                 }
             });
         }
@@ -194,15 +192,9 @@ public class ProgressButtonClass implements View.OnClickListener, ProgressButton
 
     private final Handler handler = new Handler();
 
-    private boolean isProgressAnimationCompleted = false;
-
     @Override
     public void startProgress() {
-        isProgressAnimationCompleted = false;
         startProgress(null);
-        handler.postDelayed(() -> {
-            isProgressAnimationCompleted = true;
-        }, 2000);
     }
 
     @Override
@@ -212,11 +204,7 @@ public class ProgressButtonClass implements View.OnClickListener, ProgressButton
 
     @Override
     public void revertProgress() {
-        if(isProgressAnimationCompleted) {
-            revertProgress(null);
-        }else {
-            handler.postDelayed(() -> revertProgress(null), 1000);
-        }
+        revertProgress(null);
     }
 
     @Override
@@ -447,11 +435,10 @@ public class ProgressButtonClass implements View.OnClickListener, ProgressButton
     }
 
     @Override
-    public ProgressButtonClass setStopClickProgress(boolean isStopClickProgress) {
-        this.isStopClickProgress = isStopClickProgress;
+    public ProgressButton setInitialProgressTakeTime(long initialProgressTakeTime) {
+        this.initialProgressTakeTime = initialProgressTakeTime;
         return this;
     }
-
 
     private Drawable getDrawableRes(Context context, int resource) {
         return context.getResources().getDrawable( resource);

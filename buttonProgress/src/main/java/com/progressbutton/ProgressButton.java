@@ -20,6 +20,9 @@ public interface ProgressButton {
     }
 
     interface ClickListener {
+        default boolean onValidate(){
+            return true;
+        }
         void onClicked(View view);
     }
 
@@ -92,7 +95,7 @@ public interface ProgressButton {
 
     ProgressButton setVisibility(int visibility);
 
-    ProgressButton setStopClickProgress(boolean isStopClickProgress);
+    ProgressButton setInitialProgressTakeTime(long initialProgressTakeTime);
 
     ProgressButton addProgressListener(ProgressButton.AnimatorListener listener);
 }

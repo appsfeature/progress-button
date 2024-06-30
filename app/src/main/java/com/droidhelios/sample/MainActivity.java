@@ -2,6 +2,7 @@ package com.droidhelios.sample;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +22,11 @@ public class MainActivity extends AppCompatActivity {
                 .setText("Login for your Account")
                 .setOnClickListener(new ProgressButton.ClickListener() {
                     @Override
+                    public boolean onValidate() {
+                        return false;
+                    }
+
+                    @Override
                     public void onClicked(View view) {
                         startTask();
                     }
@@ -37,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public Boolean call() throws Exception {
                 count+=1;
-                Thread.sleep(3000);
+//                Thread.sleep(3000);
                 return count == 3;
             }
         }, new TaskRunner.Callback<Boolean>() {
@@ -57,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                 }else {
+                    Toast.makeText(MainActivity.this, "Retry for your acc", Toast.LENGTH_SHORT).show();
                     // use this method when getting wrong response and revert the initial stage of button
                     btnAction.setText("Retry for your acc");
                     btnAction.revertProgress();
