@@ -1,14 +1,17 @@
 plugins {
     id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
 }
 
 android {
-    compileSdk 33
+    namespace 'com.droidhelios.sample'
+
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.progressbutton.sample"
-        minSdk 19
-        targetSdk 33
+        minSdk 25
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -23,13 +26,18 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    buildFeatures {
+        buildConfig true
     }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "androidx.appcompat:appcompat:1.6.0"
+    implementation "androidx.appcompat:appcompat:$rootProject.ext.appcompat"
+    implementation "androidx.core:core-ktx:$rootProject.ext.core_ktx"
     implementation project(path: ':buttonProgress')
 }

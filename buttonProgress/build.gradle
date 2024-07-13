@@ -1,13 +1,16 @@
 plugins {
     id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
 }
 
 android {
-    compileSdk 33
+    namespace 'com.progressbutton'
+    compileSdk 34
 
     defaultConfig {
-        minSdk 19
-        targetSdk 33
+        minSdk 25
+        targetSdk 34
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -16,11 +19,38 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+//    tasks.withType(JavaCompile).configureEach {
+//        options.compilerArgs.add("-Xlint:deprecation")
+//    }
+
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+        }
     }
 }
 
 dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "androidx.appcompat:appcompat:$rootProject.ext.appcompat"
+    implementation "androidx.core:core-ktx:$rootProject.ext.core_ktx"
+}
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.github.appsfeature'
+            artifactId = 'buttonProgress'
+            version = '2.2'
+
+            afterEvaluate {
+                from components.release
+            }
+        }
+    }
 }

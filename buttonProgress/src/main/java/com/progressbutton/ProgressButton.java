@@ -10,9 +10,6 @@ import android.widget.EditText;
 import com.progressbutton.base.ProgressButtonClass;
 
 
-/**
- * Created by Admin on 8/28/2017.
- */
 public interface ProgressButton {
 
     interface Listener {

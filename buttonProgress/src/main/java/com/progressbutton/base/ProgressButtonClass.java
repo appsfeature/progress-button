@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -18,13 +19,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.progressbutton.ProgressButton;
 import com.progressbutton.R;
 
-
-/**
- * Created by Admin on 8/28/2017.
- */
 public class ProgressButtonClass implements View.OnClickListener, ProgressButton{
 
     //================================================================================
@@ -190,7 +189,7 @@ public class ProgressButtonClass implements View.OnClickListener, ProgressButton
     }
 
 
-    private final Handler handler = new Handler();
+    private final Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
     public void startProgress() {
@@ -441,11 +440,11 @@ public class ProgressButtonClass implements View.OnClickListener, ProgressButton
     }
 
     private Drawable getDrawableRes(Context context, int resource) {
-        return context.getResources().getDrawable( resource);
+        return ContextCompat.getDrawable(context, resource);
     }
 
     private int getColorRes(Context context, int resource) {
-        return context.getResources().getColor(resource);
+        return ContextCompat.getColor(context, resource);
     }
 
     @Override
