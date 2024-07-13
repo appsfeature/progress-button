@@ -46,7 +46,7 @@ publishing {
         release(MavenPublication) {
             groupId = 'com.github.appsfeature'
             artifactId = 'buttonProgress'
-            version = '2.2'
+            version = '3.0'
 
             afterEvaluate {
                 from components.release
